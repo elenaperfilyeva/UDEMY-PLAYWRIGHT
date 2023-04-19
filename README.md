@@ -1,6 +1,6 @@
 # UDEMY-PLAYWRIGHT
 
-###### This is [Udemy](https://www.udemy.com) [Automated Software Testing with Playwright](https://www.udemy.com/course/automated-software-testing-with-playwright/) course practice project to play around with Playwright.
+###### This is [Udemy](https://www.udemy.com) [Automated Software Testing with Playwright](https://www.udemy.com/course/automated-software-testing-with-playwright/) course practice project..
 
 ---------------------------------------------------------------
 
@@ -34,4 +34,7 @@
   npm run tests:webkit
 
   npm run tests:webkit -- --headed    // to overwright configuration for the custom command
+  
+  // to run e2e tests
+  npm run tests:e2e - run e2e tests
 ```
