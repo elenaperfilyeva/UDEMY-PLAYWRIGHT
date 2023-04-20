@@ -1,36 +1,40 @@
 import { test, expect } from '@playwright/test'
+import { HomePage } from '../../page-objects/HomePage'
+import { FeedbackPage } from '../../page-objects/FeedbackPage'
 
 test.describe('Feedback Form', () => {
-test.beforeEach(async ({ page}) => {
-    await page.goto('http://zero.webappsecurity.com/index.html')
-    await page.click('#feedback')
-})
+    let homePage: HomePage
+    let feedbackPage: FeedbackPage
 
-// Reset feedback form
-test('Reset feedback form', async ({ page }) => {
-    await page.type('#name', 'some name')
-    await page.type('#email', 'some email@email.com')
-    await page.type('#subject', 'some subject')
-    await page.type('#comment', 'some nice comment about the application')
-    await page.click('input[name="clear"]')
+    test.beforeEach(async ({ page}) => {
+        homePage = new HomePage(page)
+        feedbackPage = new FeedbackPage(page)
 
-    const nameInput = await page.locator('#name')
-    const emailInput = await page.locator('#email')
-    const subjectInput = await page.locator('#subject')
-    const commentInput = await page.locator('#comment')
-    await expect(nameInput).toBeEmpty()
-    await expect(emailInput).toBeEmpty()
-    await expect(subjectInput).toBeEmpty()
-    await expect(commentInput).toBeEmpty()
-})
+        await homePage.visit()
+        await homePage.clickOnFeedbackLink()
+    })
 
-// Submit feedback form
-test('Submit feedback form', async ({ page }) => {
-    await page.type('#name', 'some name')
-    await page.type('#email', 'some email@email.com')
-    await page.type('#subject', 'some subject')
-    await page.type('#comment', 'some nice comment about the application')
-    await page.click('input[type="submit"]')
-    await page.waitForSelector('#feedback-title')
-})
+    // Reset feedback form
+    test('Reset feedback form', async ({ page }) => {
+        await feedbackPage.fillForm(
+            'name', 
+            'email@email.com', 
+            'some subject', 
+            'my awesome message'
+        )
+        await feedbackPage.resetForm()
+        await feedbackPage.assertReset()
+    })
+
+    // Submit feedback form
+    test('Submit feedback form', async ({ page }) => {
+        await feedbackPage.fillForm(
+            'name', 
+            'email@email.com', 
+            'some subject', 
+            'my awesome message'
+        )
+        await feedbackPage.submitForm()
+        await feedbackPage.feedbackFormSent()
+    })
 })
