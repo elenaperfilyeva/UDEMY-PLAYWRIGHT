@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 import { LoginPage } from '../../page-objects/LoginPage'
 import { HomePage } from '../../page-objects/HomePage'
 
-test.describe.parallel('Login / Logout Flow', () => {
+test.describe.parallel.only('Login / Logout Flow', () => {
     let loginPage: LoginPage
     let homePage: HomePage
     // Before hook
@@ -34,6 +34,9 @@ test.describe.parallel('Login / Logout Flow', () => {
         // await page.click('#signin_button')
         await homePage.clickOnSignIn()
         await loginPage.login('invalid username', 'password')
+
+        // AbstractPage class usage example
+        // await loginPage.wait(3000)
         await loginPage.assertErrorMessage()
     })
 
