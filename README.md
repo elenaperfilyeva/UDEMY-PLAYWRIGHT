@@ -36,5 +36,8 @@
   npm run tests:webkit -- --headed    // to overwright configuration for the custom command
   
   // to run e2e tests
-  npm run tests:e2e - run e2e tests
+  npm run tests:e2e
+
+  // to run api tests
+  npm run tests:api
 ```
