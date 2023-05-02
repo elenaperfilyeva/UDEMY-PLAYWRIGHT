@@ -28,16 +28,26 @@
   npx playwright test --config=playwright.config.ts --project=Chromium --reporter=junit
   npx playwright test --config=playwright.config.ts --project=Chromium --reporter=html-reporter
 
-  // to run using custom command from package.json
+  // run using custom command from package.json
   npm run tests:chrome
   npm run tests:firefox
   npm run tests:webkit
 
   npm run tests:webkit -- --headed    // to overwright configuration for the custom command
   
-  // to run e2e tests
+  // run e2e tests
   npm run tests:e2e
 
-  // to run api tests
+  // run api tests
   npm run tests:api
+
+  // run visual tests (screenshots)
+  npm run tests:visual:chrome
+  npm run tests:visual:firefox
+  npm run tests:visual:webkit
+
+  // update snapshots for visual tests
+  npm run tests:visual:chrome:update
+  npm run tests:visual:firefox:update
+  npm run tests:visual:webkit:update
 ```
